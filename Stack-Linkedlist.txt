@@ -1,0 +1,91 @@
+#include <iostream>
+#include <chrono>
+using namespace std;
+
+// Node struct for linked list
+struct Node {
+    int value;
+    Node* next;
+};
+
+Node* top = nullptr; 
+
+//push an element
+bool push(int val) {
+    Node* new_node = new Node;
+    if (new_node == nullptr) {
+        return false; //check whether memory allocation
+    }
+    new_node->value = val;
+    new_node->next = top;
+    top = new_node;
+    return true;
+}
+//pop an element
+bool pop(int& val) {
+    if (top == nullptr) {
+        return false; //check whether stack is empty
+    }
+    Node* temp = top;
+    val = temp->value;
+    top = temp->next;
+    delete temp;
+    return true;
+}
+
+int main() {
+    // Push elements onto the stack
+    auto start = chrono::high_resolution_clock::now();//use chrono library to calculate the execution time
+    push(8);
+    push(10);
+    push(5);
+    push(11);
+    push(15);
+    push(23);
+    push(6);
+    push(18);
+    push(20);
+    push(17);
+    // display the stack
+    Node* current_node = top;
+    while (current_node != nullptr) {
+        cout << current_node->value << " ";
+        current_node = current_node->next;
+    }
+    cout << endl;
+    int val;
+    // pop 5 elements from the stack
+    
+    for (int i = 0; i < 5; i++) {
+        if (pop(val)) {
+           
+        }
+    }
+    cout << endl;
+
+    current_node = top;
+    //print the current status of the stack
+    while (current_node != nullptr) {
+        cout << current_node->value << " ";
+        current_node = current_node->next;
+    }
+    cout << endl;
+   //add more 4 element to the stack
+    push(4);
+    push(30);
+    push(3);
+    push(1);
+   
+    current_node = top;
+   //dispaly the stack
+    while (current_node != nullptr) {
+        cout << current_node->value << " ";
+        current_node = current_node->next;
+    }
+    cout << endl;
+    auto end = chrono::high_resolution_clock::now();
+    // Compute and print the execution time
+    double time_taken = chrono::duration_cast<chrono::microseconds>(end - start).count();
+    cout<< time_taken << " microseconds" << endl;
+ 
+}

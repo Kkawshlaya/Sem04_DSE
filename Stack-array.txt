@@ -1,0 +1,76 @@
+#include <iostream>
+#include <chrono>
+using namespace std;
+
+#define array_size 20 //define an array size to declare global array
+
+int Stack[array_size]; 
+int top = -1; //last index
+//push an element to a stack
+bool push(int x) {
+    if (top == array_size - 1) {
+        return false;
+    }
+    top++;
+    Stack[top] = x;
+    return true;
+}
+//pop an element from the stack
+bool pop(int& x) {
+    if (top == -1) {
+        return false;
+    }
+    x = Stack[top];
+    top--;
+    return true;
+}
+
+
+int main() {
+    //chrono library to calculate execution time
+    auto start = chrono::high_resolution_clock::now();
+    push(8);//push itemsto the stack
+    push(10);
+    push(5);
+    push(11);
+    push(15);
+    push(23);
+    push(6);
+    push(18);
+    push(20);
+    push(17);
+    //display the array
+    for(int j=0;j<10;j++){
+        cout<<Stack[j]<<" ";
+    }
+    int x;
+    //pop 5 element from the stack
+    for (int i = 0; i < 5; i++) {
+        if (pop(x)) {
+           
+            }
+        }
+    //display the stack after pop actions
+    cout<<endl;
+    for(int j=0;j<5;j++){
+        cout<<Stack[j]<<" ";
+    }
+    // add more elements to the stack
+    push(4);
+    push(30);
+    push(3);
+    push(1);
+    cout<<endl;
+    //display the stack after the push actions
+    for(int j=0;j<9;j++){
+        cout<<Stack[j]<<" ";
+    }
+    cout<<endl;
+    auto end = chrono::high_resolution_clock::now();//time calculations
+
+    
+    double time_taken = chrono::duration_cast<chrono::microseconds>(end - start).count();
+    cout<< time_taken << " microseconds" << endl;//display the execution time
+
+    
+}
